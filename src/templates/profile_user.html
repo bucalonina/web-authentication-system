@@ -1,0 +1,70 @@
+<!--* Marko Dasic 2022/0731 -->
+
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+
+<div class="profile_user_all">
+    {% if user.picture %}
+        <img src="{{ user.picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-picture2" width="900" height="900" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    {% else %}
+        <img src="/media/default_avatar.jpg" alt="Default profile picture" class="profile-picture2" width="900" height="900" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    {% endif %}
+</div>
+
+<div class="profile-picture-container">
+    {% if user.picture %}
+        <img src="{{ user.picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-picture">
+    {% else %}
+        <img src="/media/default_avatar.jpg" alt="Default profile picture" class="profile-picture">
+    {% endif %}
+</div>
+
+<h1 class="profile-username">{{ user.username }}</h1>
+
+{% if request.user.id == user.id %}
+<div class="profile-buttons">
+    <a href="{% url 'edit_profile' %}" class="profile-button edit-profile">Edit Profile</a>
+    <a href="{% url 'payment' %}" class="profile-button become-premium">Become Premium Member</a>
+    <a href="{% url 'invite' %}" class="profile-button get-invite">Get Invite Link</a>
+    <a href="{% url 'delete' %}" class="profile-button delete-profile">Delete Profile</a>
+</div>
+{% else %}
+<div class="profile-buttons">
+    <a href="{% url 'chat' user.id %}" class="profile-button send-message">Send Message</a>
+    <a href="{% url 'add_rating' user.id %}" class="profile-button rating-user">Rate User</a>
+    <a href="{% url 'report' user.id %}" class="profile-button report-user">Report User</a>
+</div>
+{% endif %}
+
+<div class="profile-info">
+    <p class="profile-detail"><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+    <p class="profile-detail"><strong>Age:</strong> {{ user.age }}</p>
+    <!--p class="profile-detail"><strong>Gender:</strong> {{ user.get_gender_display }}</p-->
+    <p class="profile-detail"><strong>City:</strong> {{ user.city }}</p>
+    <p class="profile-detail"><strong>State:</strong> {{ user.state }}</p>
+    <p class="profile-detail"><strong>Bio:</strong> {{ user.bio }}</p>
+
+    <h2 class="profile-section-heading">Hobbies:</h2>
+    <ul class="profile-list">
+        {% for hobby in user.hobbies.all %}
+        <li class="profile-list-item">{{ hobby.name }} - {{ hobby.description }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if request.user.is_premium %}
+    
+    <p class="profile-detail"><strong>Average Rating:</strong> {{ user.average_rating }}</p>
+
+    <h2 class="profile-section-heading">Ratings:</h2>
+    <ul class="profile-list">
+        {% for rating in user.ratings.all %}
+        <li class="profile-list-item">{{ rating.rating }} - {{ rating.description }}</li>
+        {% endfor %}
+    </ul>
+    
+    {% endif %}
+
+</div>
+
+{% endblock %}

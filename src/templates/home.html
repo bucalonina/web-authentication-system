@@ -1,0 +1,31 @@
+<!--* Marko Dasic 2022/0731 -->
+
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+
+<div class="home_div">
+
+  <div class="home_text_left">
+    <p>Welcome to <strong class="highlight">Minus i Plus</strong> the dating app designed to bring you closer to your perfect match.</p><br>
+    <p>Whether you are looking for friendship, romance, or your soulmate we provide a safe and enjoyable platform for you to connect with like-minded individuals.</p>
+  </div>
+
+  <form class="home_form">
+    <a href="{% url 'login' %}">
+        <input type="button" id="button" class="home_button" value="login">
+    </a>
+    <a href="{% url 'register' %}">
+        <input type="button" id="button" class="home_button" value="register">
+    </a>
+  </form>
+  
+  <div class="home_text_right">
+    <p>Join <strong class="highlight">Minus i Plus</strong> today and start your journey towards meaningful connections.</p><br>
+    <p>Our advanced matching algorithms and unique features ensure that you find someone who complements your personality and interests.</p><br>
+    <p>Sign up now and discover the potential for a great relationship.</p>
+  </div>
+
+</div>
+
+{% endblock %}

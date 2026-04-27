@@ -1,0 +1,90 @@
+<!--* Vladana Babic 2021/0546 -->
+
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+
+<div class="layout-container">
+    <div class="navigation-container-left">
+        <div class="navigation-buttons-left">
+            <button class="main_button_button"  id="prev-button" onclick="showPrevProfile()" disabled>&larr; Previous</button>
+        </div>
+    </div>
+    
+    <div class="main-container">
+        <div id="profile-container" data-total-profiles="{{ users|length }}">
+            {% for user in users %}
+            <div class="profile" id="profile-{{ forloop.counter }}" data-user-id="{{ user.id }}" style="{% if not forloop.first %}display: none;{% endif %}">
+                <img src="{{ user.picture.url }}" alt="Profile Picture">
+                <p class="profilePage-username">Username:  {{ user.username }}</p>
+                <p class="profilePage-name">Name:  {{ user.first_name }} {{ user.last_name }}</p>
+                <p class="profilePage-age">Age:  {{ user.age }}</p>
+                <p class="profilePage-bio">Bio:  {{ user.bio }}</p>
+                <p class="profilePage-city">City:  {{ user.city }}, {{ user.state }}</p>
+                {% if request.user.is_premium == 1 %}
+                <p class="profilePage-rating"> 
+                    User Rating:
+                    {% if user.average_rating == 0 %}
+                    <span class="profilePage-rating">N/A</span>
+                    {% endif %}
+                    {% if user.average_rating > 0 %}
+                    <span class="profilePage-rating">{{ user.average_rating }}</span>
+                    {%endif%}
+                </p>
+                {% endif %}
+                <a href="{% url 'chat' user.id %}" class="chat-button">
+                    <button class="chat-button-main">Chat</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="navigation-container-right">
+        <div class="navigation-buttons-right">
+            <button class="main_button_button" id="next-button" onclick="showNextProfile()">Next &rarr;</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    let currentProfile = 1;
+    const totalProfiles = document.getElementById('profile-container').dataset.totalProfiles;
+
+    function showNextProfile() {
+        document.getElementById(`profile-${currentProfile}`).style.display = 'none';
+        currentProfile++;
+        document.getElementById(`profile-${currentProfile}`).style.display = 'block';
+        updateButtons();
+    }
+
+    function showPrevProfile() {
+        document.getElementById(`profile-${currentProfile}`).style.display = 'none';
+        currentProfile--;
+        document.getElementById(`profile-${currentProfile}`).style.display = 'block';
+        updateButtons();
+    }
+
+    function updateButtons() {
+        document.getElementById('prev-button').disabled = currentProfile === 1;
+        document.getElementById('next-button').disabled = currentProfile === parseInt(totalProfiles);
+    }
+
+    // Make these functions accessible globally
+    window.showNextProfile = showNextProfile;
+    window.showPrevProfile = showPrevProfile;
+    });
+
+    
+    const profiles = document.querySelectorAll('.profile');
+    profiles.forEach(profile => {
+        profile.addEventListener('click', function() {
+            const userId = this.dataset.userId;
+            window.location.href = `/profile_user/${userId}`;
+        });
+    });
+    
+</script>
+
+{% endblock %}

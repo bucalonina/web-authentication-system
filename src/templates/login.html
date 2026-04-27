@@ -1,0 +1,30 @@
+<!--* Marko Dasic 2022/0731 -->
+
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+
+<div class="login-container">
+  <form method="POST" action="" class="login-form">
+    {% csrf_token %}
+
+    <div class="login_form-group">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" placeholder="Enter Username" />
+    </div>
+
+    <div class="login_form-group">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" placeholder="Enter Password" />
+    </div>
+
+    <div class="login_form-group">
+      <input type="submit" value="Login" class="login-button" />
+    </div>
+  </form>
+
+  <p>Want to register to our site?</p>
+  <a href="{% url 'register' %}">Register</a>
+</div>
+
+{% endblock %}

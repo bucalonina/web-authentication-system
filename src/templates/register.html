@@ -1,0 +1,65 @@
+<!--* Marko Dasic 2022/0731 -->
+
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+
+<div class="register-page">
+  <div class="login-info">
+    <p>Already have an account?</p>
+    <a href="{% url 'login' %}">Login</a>
+  </div>
+
+  <div class="register-container">
+    <form method="POST" action="" class="register-form" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% if messages %}
+        <div class="error">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="form-row">
+        {{ form.username.label_tag }}{{ form.username }}
+        {{ form.email.label_tag }}{{ form.email }}
+      </div>
+      <div class="form-row">
+        {{ form.password1.label_tag }}{{ form.password1 }}
+        {{ form.password2.label_tag }}{{ form.password2 }}
+      </div>
+      <div class="form-row">
+        {{ form.first_name.label_tag }}{{ form.first_name }}
+        {{ form.last_name.label_tag }}{{ form.last_name }}
+      </div>
+      <div class="form-row">
+        {{ form.age.label_tag }}{{ form.age }}
+        {{ form.city.label_tag }}{{ form.city }}
+      </div>
+      <div class="form-row">
+        {{ form.state.label_tag }}{{ form.state }}
+        {{ form.picture.label_tag }}{{ form.picture }}
+      </div>
+      <div class="form-row">
+        {{ form.gender.label_tag }}{{ form.gender }}
+      </div>
+      <div class="form-row bio-row">
+        {{ form.bio.label_tag }}
+        {{ form.bio }}
+      </div>
+
+      <div class="hobbies-container">
+        <div class="hobbies-label">{{ form.hobbies.label_tag }}</div>
+        <div class="hobbies-checkbox">{{ form.hobbies }}</div>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Register" class="register-button" />
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

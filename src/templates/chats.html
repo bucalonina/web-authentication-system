@@ -1,0 +1,166 @@
+{% extends 'base_for_pages.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <style>
+        /* General Styles */
+        :root {
+            --color-main: #ff85a2;
+            --color-main-light: #ffd1e3;
+            --color-dark: #5c6bc0;
+            --color-dark-medium: #7986cb;
+            --color-dark-light: #c5cae9;
+            --color-light: #ffffff;
+            --color-gray: #f0f0f0;
+            --color-light-gray: #f5f5f5;
+            --color-bg: #2d3939;
+            --color-success: lightgreen;
+            --color-error: red;
+            --color-blue: blue;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--color-main);
+            color: var(--color-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        .user_info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-light);
+        }
+
+        .user_info span {
+            font-weight: bold;
+        }
+
+        .chat_container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .chat_div {
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: var(--color-light);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat_title {
+            font-size: 2rem;
+            color: var(--color-dark);
+            margin-bottom: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .chat_list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .chat_item {
+            margin: 1rem 0;
+        }
+
+        .chat_button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            color: var(--color-light);
+            background-color: var(--color-main);
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat_button:hover {
+            background-color: var(--color-success);
+        }
+
+        .chat_button img {
+            margin-right: 10px;
+            width: 30px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="user_info">
+            <span>Welcome, {{ request.user.username }}</span>
+        </div>
+    </header>
+    <div class="chat_container">
+        <div class="chat_div">
+            <h1 class="chat_title">Chats</h1>
+            <ul class="chat_list">
+                {% for item in chat_data %}
+                    <li class="chat_item">
+                        {% with chat=item.chat %}
+                            {% if chat.iduser1.id != request.user.id %}
+                                <a href="{% url 'chat' chat.iduser1.id %}" class="chat_button">
+                                    <img src="{% if chat.iduser1.picture %}{{ chat.iduser1.picture.url }}{% else %}{% static 'images/user.png' %}{% endif %}" alt="User Image">
+                                    <div class="chat_details">
+                                        <div class="username">{{ chat.iduser1.username }}</div>
+                                        {% if item.last_message %}
+                                            <div class="last_message">{{ item.last_message.text }}</div>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'chat' chat.iduser2.id %}" class="chat_button">
+                                    <img src="{% if chat.iduser2.picture %}{{ chat.iduser2.picture.url }}{% else %}{% static 'images/user.png' %}{% endif %}" alt="User Image">
+                                    <div class="chat_details">
+                                        <div class="username">{{ chat.iduser2.username }}</div>
+                                        {% if item.last_message %}
+                                            <div class="last_message">{{ item.last_message.text }}</div>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                            {% endif %}
+                        {% endwith %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

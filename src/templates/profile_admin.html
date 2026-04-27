@@ -1,0 +1,138 @@
+<!--* Pavle Kotlajic 2021/0596 -->
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .profile-picture {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin: 20px auto;
+    }
+    .field {
+        margin-bottom: 10px;
+    }
+    .field label {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+    .field .value {
+        display: inline-block;
+    }
+    .field .editable {
+        cursor: pointer;
+    }
+    .admin {
+        color: blue;
+    }
+    .button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+    .button.logout {
+        background-color: #f44336;
+    }
+    .report-section {
+        margin-top: 50px;
+    }
+    .report-table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+    }
+    .report-table th, .report-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    .report-table th {
+       
+        font-weight: bold;
+    }
+    .report-table tr:nth-child(even) {
+        
+    }
+</style>
+
+
+<body>
+    {% if user.picture %}
+    <img src="{{ user.picture.url }}" alt="{{ user.username }}'s profile picture" style="border-radius: 50%; width: 150px; height: 150px;">
+    {% else %}
+    <img src="/media/default_avatar.jpg" alt="Default profile picture" style="border-radius: 50%; width: 150px; height: 150px;">
+    {% endif %}
+    <div class="field">
+        <label>Username:</label>
+        <span class="value"><b>{{ user.username }}</b></span>
+    </div>
+    </div>
+    <div class="field">
+        <label>Name:</label>
+        <span class="value">{{ user.first_name }} {{ user.last_name }}</span>
+        
+    </div>
+    <div class="field">
+        <label>Age:</label>
+        <span class="value">{{ user.age }}</span>
+
+    </div>
+    <div class="field">
+        <label>Gender:</label>
+        <span class="value">{{ user.gender }}</span>
+    </div>
+    <div class="field">
+        <span class="value admin"><b>ADMIN</b></span>
+    </div>
+    <a href="{% url 'delete' %}"> <button class="button login" >Delete</button> </a>
+    <a href="{% url 'logout' %}"> <button class="button logout" >Logout</button> </a>
+
+    <div class="report-section">
+        <h2>User Reports</h2>
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Reported User</th>
+                    <th>User Who Reported</th>
+                    <th>Action</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tbody>
+                    {% for report in reports %}
+                    <tr>
+                        <td>{{ report.iduser1.username }}</td>
+                        <td>{{ report.iduser2.username }}</td>
+                        <td>{{ report.idrep }}</td>
+                        <td>{{ report.date }}</td>
+                        <td>{{ report.time }}</td>
+                        <td><a href="{% url 'admin_ban' report.iduser2.id %}">
+                            <button class="button logout" >Ban</button>
+                            
+                        </a></td>
+                        
+                    </tr>
+                    {% endfor %}
+                
+            
+            </tbody>
+        </table>
+    </div>
+</body>
+
+{% endblock %}

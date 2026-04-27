@@ -1,0 +1,21 @@
+<!--* Marko Dasic 2022/0731 -->
+
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+
+<div class="profile_user_all">
+    {% if user.picture %}
+        <img src="{{ user.picture.url }}" alt="{{ user.username }}'s profile picture" class="profile-picture2" width="900" height="900" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    {% else %}
+        <img src="/media/default_avatar.jpg" alt="Default profile picture" class="profile-picture2" width="900" height="900" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    {% endif %}
+</div>
+
+<h1 class="invite-link_header">GET INVITE LINK</h1>
+
+<div class="invite-link">
+    <input type="text" class="invite-link_text" readonly value="http://127.0.0.1:8000/profile_user/{{request.user.id}}">
+</div>
+
+{% endblock %}

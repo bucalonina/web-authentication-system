@@ -1,0 +1,1232 @@
+/** Marko Dasic 2022/0731 */
+/** Pavle Kotlajic */
+/** Vladana Babic 2021/0546 */
+
+
+
+/************************************************************* Marko ****************************************************************************/
+
+:root {
+    --color-main: #ff85a2;
+    --color-main-light: #ffd1e3;
+    --color-dark: #5c6bc0;
+    --color-dark-medium: #7986cb;
+    --color-dark-light: #c5cae9;
+    --color-light: #ffffff;
+    --color-gray: #f0f0f0;
+    --color-light-gray: #f5f5f5;
+    --color-bg: #2d3939;
+    --color-success: lightgreen;
+    --color-error: red;
+    --color-blue: blue;
+}
+
+
+/********************************************** Base styles */
+
+* {
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    font-size: inherit;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--color-light-gray);
+    background-color: var(--color-bg);
+    min-height: 100vh;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    display: inline-block;
+    color: var(--color-main);
+    text-decoration: none;
+}
+
+/********************************************** Header Section */
+
+
+/* avatar */
+.avatar {
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid var(--color-main);
+}
+
+.avatar img {
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/*
+.avatar::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: var(--color-gray);
+    z-index: 111;
+    border-radius: 50%;
+    border: 0.3rem solid var(--color-dark);
+}
+
+.avatar.active::after {
+    background-color: var(--color-success);
+}
+
+.avatar.avatar--small img {
+    width: 2.8rem;
+    height: 2.8rem;
+}
+
+.avatar.avatar--small:after {
+    width: 0.7rem;
+    height: 0.7rem;
+    bottom: 0px;
+    right: -6px;
+}
+
+.avatar.avatar--medium img {
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: 50%;
+}
+
+.avatar.avatar--medium:after {
+    width: 0.7rem;
+    height: 0.7rem;
+    bottom: 0px;
+    right: -6px;
+}
+
+.avatar.avatar--large img {
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.avatar.avatar--large:after {
+    width: 1rem;
+    height: 1rem;
+    bottom: 2px;
+    right: 3.5px;
+}
+*/
+
+/* welcome message */
+.welcome_message p {
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--color-success);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 10rem;
+}
+
+/* dropdown many */
+.dropdown-menu {
+    z-index: 111;
+    position: absolute;
+    top: 5rem;
+    right: 0.5rem;
+    background: var(--color-dark-light);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    padding: 1.2rem 4rem;
+    display: block;
+    color: var(--color-light) !important;
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.dropdown-menu a:hover {
+    background-color: var(--color-dark-medium);
+}
+
+.dropdown-menu > a:not(:last-child) {
+    border-bottom: 1px solid var(--color-dark-medium);
+}
+
+.dropdown-menu a svg {
+    fill: var(--color-light);
+}
+
+.header {
+    padding: 0.75rem;
+    background-color: var(--color-dark);
+}
+
+.header > .container {
+    display: flex;
+    gap: 10rem;
+}
+
+/* logo */
+.header__logo,
+.header__user {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.header__logo > img {
+    height: 5rem;
+    width: 8rem;
+}
+
+.header__logo > h1 {
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--color-light);
+}
+
+.header__logo > h1:hover {
+    color: var(--color-main);
+}
+
+/* user */
+.header__menu {
+    margin-left: auto;
+    position: relative;
+}
+
+.header__menu a {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-gray);
+}
+
+.header__menu img {
+    height: 5rem;
+}
+
+.header__user .avatar img {
+    height: 4.5rem;
+    width: 4.5rem;
+}
+
+.header__user .header__username {
+    font-size: 2.5rem;
+}
+
+.header__user .header__username:hover {
+    color: var(--color-main);
+}
+
+.header__menu span {
+    color: var(--color-main);
+    font-weight: 500;
+    font-size: 3rem;
+    display: block;
+}
+
+.header__menu svg {
+    width: 3rem;
+    height: 3rem;
+    fill: var(--color-dark-light);
+}
+
+/* dropdown button */
+.dropdown-button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+.dropdown-button:hover svg {
+    fill: var(--color-main);
+}
+
+/* chat button */
+.header_chat_button {
+    margin-right: 3rem;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 0.75s ease;
+}
+
+.header_chat_button:hover {
+    background-color: var(--color-success);
+}
+
+/******************************************** Home Section */
+
+.home_div::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    background-image: url("../images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* Adjust the opacity as needed */
+    z-index: -1;
+}
+
+.home_text_left {
+    flex: 1;
+    text-align: center;
+    color: var(--color-light);
+    font-size: 2rem;
+    margin-right: 5rem;
+    margin-left: 3rem;
+}
+
+.home_text_right {
+    flex: 1;
+    text-align: center;
+    color: var(--color-light);
+    font-size: 2rem;
+    margin-left: 5rem;
+    margin-right: 3rem;
+}
+
+.home_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.home_form {
+    display: flex;
+    gap: 10rem;
+}
+
+.home_button {
+    padding: 3rem 3rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    font-size: 4rem;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 1s ease;
+}
+
+.home_button:hover {
+    background-color: var(--color-success);
+}
+
+.highlight {
+    color: var(--color-main);
+}
+
+
+/*************************************************************** Login */
+.login-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    background-image: url("../images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* Adjust the opacity as needed */
+    z-index: -1;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding: 2rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: transparent;
+    padding: 4rem;
+    margin-bottom: 3rem;
+}
+
+.login_form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.login_form-group label {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: var(--color-light);
+}
+
+.login_form-group input[type="text"],
+.login_form-group input[type="password"] {
+    padding: 1.5rem;
+    font-size: 2rem;
+    border: 1px solid var(--color-gray);
+    border-radius: 15px;
+}
+
+.login-button {
+    padding: 1.5rem 3rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 100px;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.login-button:hover {
+    background-color: var(--color-success);
+}
+
+.login-container p,
+.login-container a {
+    margin-top: 2rem;
+    font-size: 2rem;
+    color: var(--color-light);
+}
+
+.login-container a:hover {
+    color: var(--color-main);
+}
+
+
+
+/*************************************************************** Register */
+.error {
+    font-size: 2rem;
+    color: red;
+}
+
+.register-page::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    background-image: url("../images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: 0;
+    background-attachment: fixed;
+}
+
+.register-page {
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.login-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ensures it takes full height of its container */
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    color: var(--color-light);
+    z-index: 1; /* Ensure this is above the ::before pseudo-element */
+}
+
+.login-info p {
+    margin-bottom: 1rem;
+}
+
+.login-info a {
+    color: var(--color-main);
+    font-size: 3rem;
+    text-decoration: none;
+}
+
+.login-info a:hover {
+    color: var(--color-main-light);
+}
+
+.register-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Adjusted for more space */
+    padding: 2rem;
+    background-color: transparent;
+    z-index: 1; /* Ensure this is above the ::before pseudo-element */
+}
+
+.register-form {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.form-row > div {
+    flex: 1;
+}
+
+.register-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form .form-group label {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: var(--color-light);
+}
+
+.register-form .form-group input[type="text"],
+.register-form .form-group input[type="email"],
+.register-form .form-group input[type="password"],
+.register-form .form-group input[type="number"],
+.register-form .form-group input[type="file"],
+.register-form .form-group select,
+.register-form .form-group textarea {
+    padding: 1.5rem;
+    font-size: 2rem;
+    border: 1px solid var(--color-gray);
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.register-form .form-group input[type="radio"],
+.register-form .form-group input[type="checkbox"] {
+    margin-right: 1rem;
+    transform: scale(1.5);
+}
+
+.register-form .form-group input[type="submit"] {
+    padding: 1.5rem 3rem;
+    font-size: 2.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 100px;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 1s ease;
+}
+
+.register-form .form-group input[type="submit"]:hover {
+    background-color: var(--color-success);
+}
+
+.register-form .form-group textarea {
+    resize: vertical;
+}
+
+/* Added specific styles for the bio row */
+.bio-row {
+    flex-direction: column;
+}
+
+.bio-row textarea {
+    width: 100%;
+}
+
+/* Styles for the hobbies section */
+.hobbies-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2rem;
+    background-color: transparent;
+    padding: 2rem;
+}
+
+.hobbies-label {
+    font-size: 2rem;
+    color: var(--color-light);
+    margin-bottom: 1rem;
+}
+
+.hobbies-checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hobbies-checkbox label {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--color-light);
+}
+
+.hobbies-checkbox input {
+    margin-right: 1rem;
+    transform: scale(1.5);
+}
+
+.register-container p,
+.register-container a {
+    margin-top: 2rem;
+    font-size: 2rem;
+    color: var (--color-light);
+}
+
+.register-container a:hover {
+    color: var(--color-main);
+}
+
+
+/********************************************** Profile Page Section */
+
+.profile_user_all {
+    position: relative;
+}
+
+.profile-picture2 {
+    width: 900px;
+    height: 900px;
+    border: 3px solid var(--color-main);
+}
+
+.profile_user_all {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    width: 1000px;
+    margin: auto;
+    height: calc(100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: -1;
+    background-attachment: fixed;
+}
+
+.profile-picture-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    width: 300px;
+    height: 300px;
+    border: 3px solid var(--color-main);
+}
+
+.profile-username {
+    text-align: center;
+    font-size: 3.5rem;
+    color: var(--color-main);
+    margin: 2rem 0;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(92, 107, 192, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    backdrop-filter: blur(5px);
+}
+
+.profile-detail {
+    font-size: 1.8rem;
+    margin: 1rem 0;
+}
+
+.profile-detail strong {
+    color: var(--color-main);
+}
+
+.profile-section-heading {
+    font-size: 2.5rem;
+    color: var(--color-main);
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.profile-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.profile-list-item {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+
+.profile-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 30px; /* Add margin below the buttons */
+}
+
+.profile-button {
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.profile-button:hover {
+    background-color: var(--color-success);
+}
+
+/* Adjust button colors for different actions */
+.edit-profile {
+    background-color: var(--color-main);
+}
+
+.become-premium {
+    background-color: var(--color-dark);
+}
+
+.get-invite {
+    background-color: var(--color-main-light);
+}
+
+.delete-profile {
+    background-color: var(--color-error);
+}
+
+.send-message {
+    background-color: var(--color-main);
+}
+
+.rating-user {
+    background-color: var(--color-dark);
+}
+
+.report-user {
+    background-color: var(--color-error);
+}
+
+.edit-profile:hover {
+    background-color: var(--color-success);
+}
+
+.become-premium:hover {
+    background-color: var(--color-success);
+}
+
+.get-invite:hover {
+    background-color: var(--color-success);
+}
+
+.delete-profile:hover {
+    background-color: darkred;
+}
+
+.send-message:hover {
+    background-color: var(--color-success);
+}
+
+.rating-user:hover {
+    background-color: var(--color-success);
+}
+
+.report-user:hover {
+    background-color: darkred;
+}
+
+
+.rating-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+}
+
+.rating-form h1 {
+    color: var(--color-main);
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.rating-form__form {
+    width: 100%;
+}
+
+.rating-form__button {
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    margin-top: 2rem;
+}
+
+.rating-form__button:hover {
+    background-color: var(--color-success);
+}
+
+.rating-form__label {
+    margin-bottom: 1rem;
+}
+
+.rating-form__input,
+.rating-form__textarea {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 1px solid var(--color-gray);
+    border-radius: 5px;
+    background-color: transparent;
+    margin-bottom: 1rem;
+    color: var(--color-light);
+}
+
+.rating-form__input::placeholder,
+.rating-form__textarea::placeholder {
+    color: var(--color-light-gray);
+}
+
+.rating-form__input:focus,
+.rating-form__textarea:focus {
+    outline: none;
+    border-color: var(--color-main);
+}
+
+
+/********************************************** Report i add_rating styles */
+
+
+.rating-form__heading {
+    color: var(--color-main);
+    margin-bottom: 10rem;
+    font-size: 6rem;
+    text-align: center;
+}
+
+.rating-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(92, 107, 192, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    backdrop-filter: blur(5px);
+}
+
+.rating-form__form {
+    width: 100%;
+}
+
+.rating-form__button {
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    margin-top: 2rem;
+}
+
+.rating-form__button:hover {
+    background-color: var(--color-success);
+}
+
+.rating-form__label {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: var(--color-light);
+}
+
+.rating-form__input,
+.rating-form__textarea {
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 2rem;
+    border: 1px solid var(--color-gray);
+    border-radius: 15px;
+    background-color: transparent;
+    margin-bottom: 2rem;
+    color: var(--color-light);
+}
+
+.rating-form__input::placeholder,
+.rating-form__textarea::placeholder {
+    color: var(--color-light-gray);
+}
+
+.rating-form__input:focus,
+.rating-form__textarea:focus {
+    outline: none;
+    border-color: var(--color-main);
+}
+
+
+/********************************************** Invite link */
+
+/* Invite Link Header */
+.invite-link_header {
+    margin-top: 10rem;
+    text-align: center;
+    font-size: 3.5rem;
+    color: var(--color-main);
+    margin-bottom: 10rem;
+}
+
+/* Invite Link Container */
+.invite-link {
+    text-align: center;
+    background-color: transparent;
+}
+
+/* Invite Link Text */
+.invite-link_text {
+    width: 35%;
+    padding: 2rem;
+    font-size: 3rem;
+    border: 1px solid var(--color-gray);
+    border-radius: 15px;
+    color: black;
+    text-align: center;
+}
+
+.invite-link_text:read-only {
+    cursor: not-allowed;
+    background-color: var(--color-light-gray);
+}
+
+
+
+
+
+
+/************************************************************* Pavle ****************************************************************************/
+
+
+
+
+/************************************************************* Vladana ****************************************************************************/
+
+
+/* style for payment page */
+
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2rem;
+    background-color: transparent;
+    padding: 2rem;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.payment-label {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--color-light);
+}
+
+.payment-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.payment-input:focus {
+    border-color: var(--color-dark-medium);
+    outline: none;
+}
+
+.payment-input::placeholder {
+    color: #999;
+}
+
+.payment-submit {
+    padding: 1.5rem 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    font-size: 4rem;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 1s ease;
+    margin-top: 25px;
+}
+
+.payment-submit:hover {
+    background-color: var(--color-success);
+}
+
+
+
+
+
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 0px; 
+}
+
+.navigation-container-left, .navigation-container-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation-container-left {
+    grid-column: 1 / span 3;
+}
+
+.main-container {
+    grid-column: 4 / span 6;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation-container-right {
+    grid-column: 10 / span 3;
+}
+
+
+#profile-container {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.profile img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%; /* Make it round */
+    margin-bottom: 20px;
+}
+
+/* Container for the profiles */
+
+.profilePage-username,
+.profilePage-rating,
+.profilePage-name,
+.profilePage-age,
+.profilePage-bio,
+.profilePage-city {
+    font-size: 2rem; /* Adjust font size */
+    color: var(--color-main); /* Set main color */
+}
+
+.chat-button-main {
+    padding: 1rem 4rem;
+    font-size: 3rem;
+    font-weight: bold;
+    border-radius: 100px;
+    border: none;
+    background-color: var(--color-main);
+    color: var(--color-light);
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    margin-top: 2rem;
+}
+
+.profile:first-of-type {
+    display: block; /* Show the first profile initially */
+}
+
+
+
+#profile-container {
+    text-align: center;
+    justify-content: center;
+    background-color: rgba(92, 107, 192, 0.5);
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 600px;
+    backdrop-filter: blur(5px);
+}
+
+.navigation-buttons-left button,
+.navigation-buttons-right button {
+    background-color: var(--color-main);
+    color: white;
+    border: none;
+    padding: 0px 0px;
+    font-size: 4rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    width: 250px;
+    height: 250px;
+}
+
+/* Change color on hover */
+.navigation-buttons-left button:hover,
+.navigation-buttons-right button:hover {
+    background-color: var(--color-success);
+}
+
+/************************************************************* Nina ****************************************************************************/
+
+
+#chat-page h1 {
+    color: var(--color-main);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+#chat-page #chat-box {
+    border: 1px solid var(--color-dark-light);
+    padding: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+#chat-page .message {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+#chat-page .message strong {
+    color: var(--color-dark);
+}
+
+#chat-page .message span {
+    margin-left: 0.5rem;
+    color: #666;
+}
+
+#chat-page .message small {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+#chat-page form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-page textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #5604f9;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#chat-page button {
+    align-self: flex-end;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-main);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#chat-page button:hover {
+    background-color: var(--color-main-dark);
+}

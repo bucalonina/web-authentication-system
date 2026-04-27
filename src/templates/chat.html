@@ -1,0 +1,30 @@
+{% extends 'base_for_pages.html'%}
+
+{% block content %}
+<body id="chat-page">
+    <h1>Chat with {{ recipient.username }}</h1>
+    
+    <div id="chat-box">
+        {% for message in messages %}
+            <div class="message">
+                <strong>{{ message.iduser1.username }}:</strong>
+                <span>{{ message.text }}</span>
+                <small>{{ message.time }}</small>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="message" placeholder="Type your message here..."></textarea>
+        <button type="submit">Send</button>
+    </form>
+
+    <div>
+        <a href="{% url 'add_rating' recipient.id %}"><button>Rate</button></a>
+        <a href="{% url 'report' recipient.id %}"><button>Report</button></a>
+    </div>
+</body>
+</html>
+{% endblock %}
+

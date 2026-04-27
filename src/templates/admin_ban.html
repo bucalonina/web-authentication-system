@@ -1,0 +1,71 @@
+<!--* Pavle Kotlajic 2021/0596 -->
+
+{% extends 'base_for_pages.html' %}
+
+{% block content %}
+<title>Banovanje Korisnika</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #user-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+    #ban-checkbox {
+        margin-bottom: 10px;
+    }
+    #back-btn {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <h1>Banovanje Korisnika</h1>
+    {% if user.picture %}
+    <img src="{{ user.picture.url }}" alt="{{ user.username }}'s profile picture" style="border-radius: 50%; width: 150px; height: 150px;">
+    {% else %}
+    <img src="/media/default_avatar.jpg" alt="Default profile picture" style="border-radius: 50%; width: 150px; height: 150px;">
+    {% endif %}
+    <div class="field">
+        <label>Username:</label>
+        <span class="value"><b>{{ korisnik.username }}</b></span>
+    </div>
+    </div>
+    <div class="field">
+        <label>Name:</label>
+        <span class="value">{{ korisnik.first_name }} {{ korisnik.last_name }}</span>
+        
+    </div>
+    <div class="field">
+        <label>Age:</label>
+        <span class="value">{{ korisnik.age }}</span>
+
+    </div>
+    <div class="field">
+        <label>Gender:</label>
+        <span class="value">{{ korisnik.gender }}</span>
+    </div>
+    <form method="post" action="{% url 'ban_user' korisnik.id %}">
+        {% csrf_token %}
+        <label for="ban-checkbox">Banuj korisnika:</label>
+        <input type="checkbox" id="ban-checkbox" name="banovanje">
+        <br>
+        <input type="submit" value="Potvrdi">
+    </form>
+    <a href="{% url 'home' %}">
+        <button class="button">Povratak na pocetnu stranu</button>
+    </a>
+   
+    
+</body>
+
+{% endblock %}
