@@ -1,0 +1,219 @@
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Admin`
+( 
+	`IDADMIN`            char(18)  NOT NULL ,
+	`username`           char(18)  NULL ,
+	`password`           char(18)  NULL 
+);
+
+ALTER TABLE `Admin`
+	ADD CONSTRAINT `XPKAdmin` PRIMARY KEY  (`IDADMIN` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `chats`
+( 
+	`IDUSER1`            char(18)  NOT NULL ,
+	`IDUSER2`            char(18)  NOT NULL ,
+	`IDMSG`              char(18)  NOT NULL ,
+	`IDUSER`             char(18)  NOT NULL 
+);
+
+ALTER TABLE `chats`
+	ADD CONSTRAINT `XPKchats` PRIMARY KEY  (`IDUSER1` ASC,`IDUSER2` ASC,`IDMSG` ASC,`IDUSER` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Has`
+( 
+	`IDHOBBY`            char(18)  NOT NULL ,
+	`IDUSER`             char(18)  NOT NULL 
+);
+
+ALTER TABLE `Has`
+	ADD CONSTRAINT `XPKHas` PRIMARY KEY  (`IDHOBBY` ASC,`IDUSER` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Hobby`
+( 
+	`IDHOBBY`            char(18)  NOT NULL ,
+	`name`               char(18)  NULL ,
+	`description`        char(18)  NULL 
+);
+
+ALTER TABLE `Hobby`
+	ADD CONSTRAINT `XPKHobby` PRIMARY KEY  (`IDHOBBY` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Message`
+( 
+	`IDUSER1`            char(18)  NOT NULL ,
+	`IDUSER2`            char(18)  NOT NULL ,
+	`time`               char(18)  NULL ,
+	`date`               char(18)  NULL ,
+	`IDMSG`              char(18)  NOT NULL ,
+	`text`               char(18)  NULL 
+);
+
+ALTER TABLE `Message`
+	ADD CONSTRAINT `XPKMessage` PRIMARY KEY  (`IDUSER1` ASC,`IDUSER2` ASC,`IDMSG` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Payment`
+( 
+	`IDUSER`             char(18)  NULL ,
+	`IDPAY`              char(18)  NOT NULL ,
+	`date`               char(18)  NULL 
+);
+
+ALTER TABLE `Payment`
+	ADD CONSTRAINT `XPKPayment` PRIMARY KEY  (`IDPAY` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Rating`
+( 
+	`IDUSER1`            char(18)  NOT NULL ,
+	`IDUSER2`            char(18)  NOT NULL ,
+	`ocena`              char(18)  NULL 
+);
+
+ALTER TABLE `Rating`
+	ADD CONSTRAINT `XPKRating` PRIMARY KEY  (`IDUSER1` ASC,`IDUSER2` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Report`
+( 
+	`IDUSER1`            char(18)  NOT NULL ,
+	`IDUSER2`            char(18)  NOT NULL ,
+	`date`               char(18)  NULL ,
+	`IDREP`              char(18)  NOT NULL ,
+	`time`               char(18)  NULL 
+);
+
+ALTER TABLE `Report`
+	ADD CONSTRAINT `XPKReport` PRIMARY KEY  (`IDUSER1` ASC,`IDUSER2` ASC,`IDREP` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `Suspension`
+( 
+	`date`               char(18)  NULL ,
+	`time`               char(18)  NULL ,
+	`IDSUS`              char(18)  NOT NULL ,
+	`IDADMIN`            char(18)  NULL ,
+	`IDUSER`             char(18)  NULL 
+);
+
+ALTER TABLE `Suspension`
+	ADD CONSTRAINT `XPKSuspension` PRIMARY KEY  (`IDSUS` ASC);
+ 
+
+-- SQLINES LICENSE FOR EVALUATION USE ONLY
+CREATE TABLE `User`
+( 
+	`IDUSER`             char(18)  NOT NULL ,
+	`username`           char(18)  NULL ,
+	`name`               char(18)  NULL ,
+	`surname`            char(18)  NULL ,
+	`age`                char(18)  NULL ,
+	`sex`                char(18)  NULL ,
+	`password`           char(18)  NULL ,
+	`city`               char(18)  NULL ,
+	`state`              char(18)  NULL ,
+	`premium`            char(18)  NULL 
+);
+
+ALTER TABLE `User`
+	ADD CONSTRAINT `XPKUser` PRIMARY KEY  (`IDUSER` ASC);
+ 
+
+
+ALTER TABLE `chats`
+	ADD CONSTRAINT `R_21` FOREIGN KEY (`IDUSER1`,`IDUSER2`,`IDMSG`) REFERENCES `Message`(`IDUSER1`,`IDUSER2`,`IDMSG`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+ALTER TABLE `chats`
+	ADD CONSTRAINT `R_22` FOREIGN KEY (`IDUSER`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+
+ALTER TABLE `Has`
+	ADD CONSTRAINT `R_25` FOREIGN KEY (`IDHOBBY`) REFERENCES `Hobby`(`IDHOBBY`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+ALTER TABLE `Has`
+	ADD CONSTRAINT `R_26` FOREIGN KEY (`IDUSER`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+
+ALTER TABLE `Message`
+	ADD CONSTRAINT `R_15` FOREIGN KEY (`IDUSER1`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+ALTER TABLE `Message`
+	ADD CONSTRAINT `R_16` FOREIGN KEY (`IDUSER2`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+
+ALTER TABLE `Payment`
+	ADD CONSTRAINT `R_20` FOREIGN KEY (`IDUSER`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+
+ALTER TABLE `Rating`
+	ADD CONSTRAINT `R_17` FOREIGN KEY (`IDUSER1`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+ALTER TABLE `Rating`
+	ADD CONSTRAINT `R_18` FOREIGN KEY (`IDUSER2`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+
+ALTER TABLE `Report`
+	ADD CONSTRAINT `R_13` FOREIGN KEY (`IDUSER1`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+ALTER TABLE `Report`
+	ADD CONSTRAINT `R_14` FOREIGN KEY (`IDUSER2`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+
+ALTER TABLE `Suspension`
+	ADD CONSTRAINT `R_23` FOREIGN KEY (`IDADMIN`) REFERENCES `Admin`(`IDADMIN`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
+
+ALTER TABLE `Suspension`
+	ADD CONSTRAINT `R_24` FOREIGN KEY (`IDUSER`) REFERENCES `User`(`IDUSER`)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION;
+ 
